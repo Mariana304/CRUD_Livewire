@@ -3,14 +3,12 @@
     {{-- form para crear posts --}}
     <div class="bg-white shadow mb-8 rounded-lg p-6">
         <form wire:submit="save">
-
-
             <div class="mb-4">
                 <x-label>
                     Nombre
                 </x-label>
 
-                <x-input class="w-full" wire:model="postCreate.title" />
+                <x-input class="w-full" wire:model.live="postCreate.title" />
                 
                 <x-input-error for="postCreate.title" />
 
@@ -21,7 +19,7 @@
                 <x-label>
                     Contenido
                 </x-label>
-                <x-textarea class="w-full" wire:model="postCreate.content"></x-textarea>
+                <x-textarea class="w-full" wire:model.live="postCreate.content"></x-textarea>
                 <x-input-error for="postCreate.content" />
             </div>
 
@@ -30,7 +28,7 @@
                     Categoria
                 </x-label>
 
-                <x-select class="w-full" wire:model="postCreate.category_id">
+                <x-select class="w-full" wire:model.live="postCreate.category_id">
                     <option value="" disabled>
                         Seleccione una categoria
                     </option>
@@ -53,7 +51,7 @@
                         <li>
 
                             <label>
-                                <x-checkbox wire:model="postCreate.tags" value="{{ $tag->id }}" />
+                                <x-checkbox wire:model.live="postCreate.tags" value="{{ $tag->id }}" />
                                 {{ $tag->name }}
                             </label>
 
@@ -103,7 +101,7 @@
 
     {{-- form para actualizar posts --}}
     <form wire:submit="update">
-        <x-dialog-modal wire:model="open">
+        <x-dialog-modal wire:model="postEdit.open">
             <x-slot name="title">
                 Actualizar Post
             </x-slot>
@@ -156,7 +154,7 @@
             </x-slot>
             <x-slot name="footer">
                 <div class="flex justify-end mt-2">
-                    <x-danger-button class="mr-3" wire:click="$set('open', false)">
+                    <x-danger-button class="mr-3" wire:click="$set('postEdit.open', false)">
                         Cancelar
                     </x-danger-button>
 
